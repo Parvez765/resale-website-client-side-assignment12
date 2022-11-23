@@ -1,10 +1,11 @@
 import React from 'react';
 import headerImg from "../../../assests/images/headerImg-01.png"
+import SerachSection from '../SerachSection/SerachSection';
 
 const Home = () => {
     return (
-        <div className=' bg-gray-100 p-4'>
-            <div className='flex items-center flex-col lg:flex-row-reverse justify-center'>
+        <div className="">
+            <div className='flex items-center flex-col lg:flex-row-reverse justify-center  bg-gray-100 p-4'>
                 <div>
                     <img src={headerImg} className="w-[800px]" alt="" />
                 </div>
@@ -14,6 +15,7 @@ const Home = () => {
                     <button className='btn btn-primary mt-5'>Book Now</button>
                 </div>
             </div>
+            <SerachSection></SerachSection>
         </div>
     );
 };
