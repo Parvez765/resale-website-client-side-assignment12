@@ -4,7 +4,11 @@ const Blog = () => {
     return (
         <div className='mt-10'>
             <h2 className='text-3xl font-bold'>What are the different ways to manage <br /> a state in a React application?</h2>
-            <p className='text-2xl font-bold mt-5'>There are four different ways to manage a state in React application. They are: <br/> 1. Local state. 2. Global state. 3. Server state. 4. URL state.</p>
+            <p className='text-2xl font-bold mt-5'>There are four different ways to manage a state in React application. They are: <br /> 1. Local state. 2. Global state. 3. Server state. 4. URL state.</p>
+            <div className="divider">Q</div>
+            <h2 className='text-3xl font-bold'>How does prototypical inheritance work?</h2>
+            <p className='text-2xl font-bold mt-5'> Prototypal Inheritance is a method by which an object can inherit the properties and methods of another object. <br/>Traditionally, in order to get and set the Prototype of an object, we use Object. getPrototypeOf and Object.</p>
+            <div className="divider">Q</div>
         </div>
     );
 };
