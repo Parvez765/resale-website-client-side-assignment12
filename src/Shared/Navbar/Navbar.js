@@ -2,10 +2,22 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logoIcon from "../../../src/assests/images/logo-01.png"
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
+import Swal from 'sweetalert2'
 
 const Navbar = () => {
 
-    const {user} = useContext(AuthContext)
+    const { user, userSignOut } = useContext(AuthContext)
+    
+    const handleSignOut = () => {
+        userSignOut()
+            .then(() => {
+                Swal.fire(
+                    'User Logout Successfully!',
+                    'success'
+                  )
+            })
+        .catch(err => console.error(err))
+    }
 
     return (
         <div className='container mx-auto'>
@@ -25,7 +37,7 @@ const Navbar = () => {
                         <li><Link to="/blog">Blog</Link></li>
                         {user?.email ? <>
                             <li><Link to="">Dashboard</Link></li>
-                            <li><Link to="/login"><button className='btn btn-primary'>Log Out</button></Link></li> 
+                            <li><Link to=""><button className='btn btn-primary' onClick={handleSignOut}>Log Out</button></Link></li> 
                             
                         </> :
                         
@@ -48,11 +60,10 @@ const Navbar = () => {
                         <li><Link to="/blog">Blog</Link></li>
                         {user?.email ? <>
                             <li><Link to="">Dashboard</Link></li>
-                            <li><Link to="/login"><button className='btn btn-primary'>Log Out</button></Link></li> 
+                            <li><Link to=""><button className='btn btn-primary'>Log Out</button></Link></li> 
                             
                         </> :
-                        
-                             <li><Link to=""><button className='btn btn-primary'>Log In</button></Link></li>
+                            <li><Link to=""><button className='btn btn-primary' >Log In</button></Link></li>
                        
                        }
                     

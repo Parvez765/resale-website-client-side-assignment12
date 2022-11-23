@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import app from '../../firebase/firebase.config';
-import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged} from "firebase/auth"
+import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut} from "firebase/auth"
+import { current } from 'daisyui/src/colors';
 
 
 
@@ -15,25 +16,33 @@ const AuthProvider = ({ children }) => {
 
     // Create User With Email And Password
     const createUser = (email, password) => {
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
-    // Observar
-    useEffect( () =>{
-        const unsubscribe = onAuthStateChanged(auth, currentUser =>{
-            console.log('user observing');
-            setUser(currentUser);
-            setLoading(false);
-        });
+    // Sigout User
+    const userSignOut = () => {
+        setLoading(true)
+        return signOut(auth)
+    }
 
-        return () => unsubscribe();
+    // Observar
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser)
+            setLoading(false)
+        })
+        return () => {
+            unsubscribe()
+        }
     }, [])
    
     
     const authInfo = {
         user,
         createUser,
-        loading
+        loading,
+        userSignOut
     }
 
    
