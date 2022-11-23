@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { AuthContext } from '../Context/AuthProvider/AuthProvider';
 import Swal from 'sweetalert2'
@@ -7,6 +7,13 @@ import { Link } from 'react-router-dom';
 
 
 const Signup = () => {
+
+    const [seller, setSeller] = useState(false)
+
+    const setIsSeller = () => {
+        setSeller(!seller)
+    }
+
     const { createUser, user, googleSignIn } = useContext(AuthContext)
     
     const googleProvider = new GoogleAuthProvider()
@@ -17,10 +24,12 @@ const Signup = () => {
         const name = form.name.value
         const email = form.email.value
         const password = form.password.value
+        const seller = String(form.seller.value) === '1' || String(form.seller.value).toLowerCase() === 'true' 
+        
 
         createUser(email, password)
             .then(result => {
-                const user = result.user
+                signupuserInfo(name, email, seller)
                 Swal.fire(
                     'Congratulation!',
                     'User Created Successfully!',
@@ -33,7 +42,10 @@ const Signup = () => {
     
     const handleGoogleSignIn = () => {
         googleSignIn(googleProvider)
-            .then(result => {
+           
+                .then(result => {
+                    const user = result.user
+                    googleuserInfo(user.displayName, user.email)
                 Swal.fire(
                     'Congratulation!',
                     'User Created Successfully!',
@@ -42,7 +54,32 @@ const Signup = () => {
             })
         .catch(err=> console.error(err))
     }
+
+
+    // Sending User Info At Databse
+    const signupuserInfo = (name, email, isSeller, isVerified = false) => {
+        const user = { name, email, isSeller, isVerified }
+        fetch(`http://localhost:5000/users`, {
+            method: "POST",
+            headers: {
+                "content-type" : "application/json"
+            },
+            body: JSON.stringify(user)
+        })
+    }
     
+    const googleuserInfo = (displayName, email) => {
+        const user = { displayName, email }
+        fetch(`http://localhost:5000/users`, {
+            method: "POST",
+            headers: {
+                "content-type" : "application/json"
+            },
+            body: JSON.stringify(user)
+        })
+    }
+
+
     return (
         <div>
            <div className="hero">
@@ -73,6 +110,8 @@ const Signup = () => {
                                 <input type="password" name="password" placeholder="password" className="input input-bordered" />
                                 
                                 </div>
+                                 <label className='label'><input type="checkbox" name="seller" value={seller} checked={seller} onChange={setIsSeller} className="checkbox" /> Seller</label>
+                               
                                 <div className="form-control mt-6">
                                 <button className="btn btn-primary">Sign Up</button>
                                 </div>

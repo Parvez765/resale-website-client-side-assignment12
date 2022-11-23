@@ -1,4 +1,6 @@
+import DashboardLayout from "../Layout/DashboardLayout";
 import Blog from "../Pages/Blog/Blog";
+import Dashboard from "../Pages/Dashboard/Dashboard";
 import Login from "../Pages/Login/Login";
 import Error from "../Shared/Error/Error";
 import Signup from "../Signup/Signup";
@@ -21,6 +23,13 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/signup", element: <Signup></Signup>
+            }
+        ]
+    },
+    {
+        path: "/dashboard", element: <DashboardLayout></DashboardLayout>, children: [
+            {
+                path: "/dashboard", element: <Dashboard></Dashboard>
             }
         ]
     }

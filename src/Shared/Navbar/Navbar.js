@@ -36,7 +36,7 @@ const Navbar = () => {
                        
                         <li><Link to="/blog">Blog</Link></li>
                         {user?.email ? <>
-                            <li><Link to="">Dashboard</Link></li>
+                            <li><Link to="/dashboard">Dashboard</Link></li>
                             <li><Link to="/login"><button className='btn btn-primary' onClick={handleSignOut}>Log Out</button></Link></li> 
                             
                         </> :
@@ -62,7 +62,7 @@ const Navbar = () => {
                       
                         <li><Link to="/blog">Blog</Link></li>
                         {user?.email ? <>
-                            <li><Link to="">Dashboard</Link></li>
+                            <li><Link to="/dashboard">Dashboard</Link></li>
                             <li><Link to="/login"><button className='btn btn-primary' onClick={handleSignOut}>Log Out</button></Link></li> 
                             
                         </> :
@@ -73,7 +73,7 @@ const Navbar = () => {
                     
                     </ul>
                 </div>
-               
+                <label htmlFor="product-drawer" className="btn btn-primary drawer-button lg:hidden">See Options</label>
             </div>
         </div>
     );
