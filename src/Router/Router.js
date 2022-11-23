@@ -1,5 +1,6 @@
 import Blog from "../Pages/Blog/Blog";
 import Error from "../Shared/Error/Error";
+import Signup from "../Signup/Signup";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../Layout/Main");
@@ -13,6 +14,9 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/blog", element: <Blog></Blog>
+            },
+            {
+                path: "/signup", element: <Signup></Signup>
             }
         ]
     }

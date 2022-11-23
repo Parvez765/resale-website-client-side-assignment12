@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logoIcon from "../../../src/assests/images/logo-01.png"
+import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const Navbar = () => {
+
+    const {user} = useContext(AuthContext)
+
     return (
         <div className='container mx-auto'>
             <div className="navbar bg-base-100">
@@ -17,9 +21,17 @@ const Navbar = () => {
                             <div><Link className="btn btn-ghost normal-case text-xl">BuyandSell.com</Link></div>
                         </div>
                         <li><Link to="/">Home</Link></li>
-                        <li><Link to="">Dashboard</Link></li>
+                       
                         <li><Link to="/blog">Blog</Link></li>
-                        <li><Link to=""><button className='btn btn-primary'>Log In</button></Link></li>
+                        {user?.email ? <>
+                            <li><Link to="">Dashboard</Link></li>
+                            <li><Link to="/login"><button className='btn btn-primary'>Log Out</button></Link></li> 
+                            
+                        </> :
+                        
+                             <li><Link to=""><button className='btn btn-primary'>Log In</button></Link></li>
+                       
+                       }
                     
                    
                     </ul>
@@ -32,9 +44,17 @@ const Navbar = () => {
                 <div className="navbar-end hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">
                         <li><Link to="/">Home</Link></li>
-                        <li><Link to="">Dashboard</Link></li>
+                      
                         <li><Link to="/blog">Blog</Link></li>
-                        <li><Link to=""><button className='btn btn-primary'>Log In</button></Link></li>
+                        {user?.email ? <>
+                            <li><Link to="">Dashboard</Link></li>
+                            <li><Link to="/login"><button className='btn btn-primary'>Log Out</button></Link></li> 
+                            
+                        </> :
+                        
+                             <li><Link to=""><button className='btn btn-primary'>Log In</button></Link></li>
+                       
+                       }
                     
                     
                     </ul>
