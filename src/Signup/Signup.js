@@ -2,10 +2,13 @@ import React, { useContext } from 'react';
 
 import { AuthContext } from '../Context/AuthProvider/AuthProvider';
 import Swal from 'sweetalert2'
+import { GoogleAuthProvider } from 'firebase/auth';
 
 
 const Signup = () => {
-    const {  createUser, user } = useContext(AuthContext)
+    const { createUser, user, googleSignIn } = useContext(AuthContext)
+    
+    const googleProvider = new GoogleAuthProvider()
 
     const handleOnSubmit = event => {
         event.preventDefault()
@@ -25,7 +28,19 @@ const Signup = () => {
                
             })
         .catch(err=> console.error(err))
-   }
+    }
+    
+    const handleGoogleSignIn = () => {
+        googleSignIn(googleProvider)
+            .then(result => {
+                Swal.fire(
+                    'Congratulation!',
+                    'User Created Successfully!',
+                    'success'
+                  )
+            })
+        .catch(err=> console.error(err))
+    }
     
     return (
         <div>
@@ -62,6 +77,9 @@ const Signup = () => {
                                 </div>
                             </div>
                         </form>
+                        <div className='mb-6'>
+                        <button className='btn btn-outline' onClick={handleGoogleSignIn}>Sign In With Google</button>
+                        </div>
                     </div>
                 </div>
             </div>
