@@ -1,4 +1,5 @@
 import Blog from "../Pages/Blog/Blog";
+import Login from "../Pages/Login/Login";
 import Error from "../Shared/Error/Error";
 import Signup from "../Signup/Signup";
 
@@ -14,6 +15,9 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/blog", element: <Blog></Blog>
+            },
+            {
+                path: "/login", element: <Login></Login>
             },
             {
                 path: "/signup", element: <Signup></Signup>

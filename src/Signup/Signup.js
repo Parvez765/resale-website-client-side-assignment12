@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../Context/AuthProvider/AuthProvider';
 import Swal from 'sweetalert2'
 import { GoogleAuthProvider } from 'firebase/auth';
+import { Link } from 'react-router-dom';
 
 
 const Signup = () => {
@@ -80,6 +81,7 @@ const Signup = () => {
                         <div className='mb-6'>
                         <button className='btn btn-outline' onClick={handleGoogleSignIn}>Sign In With Google</button>
                         </div>
+                        <Link to="/login"><button className='btn btn-link'>Already Have An Account? Please Login</button></Link>
                     </div>
                 </div>
             </div>

@@ -37,11 +37,11 @@ const Navbar = () => {
                         <li><Link to="/blog">Blog</Link></li>
                         {user?.email ? <>
                             <li><Link to="">Dashboard</Link></li>
-                            <li><Link to=""><button className='btn btn-primary' onClick={handleSignOut}>Log Out</button></Link></li> 
+                            <li><Link to="/login"><button className='btn btn-primary' onClick={handleSignOut}>Log Out</button></Link></li> 
                             
                         </> :
                         
-                             <li><Link to=""><button className='btn btn-primary'>Log In</button></Link></li>
+                             <li><Link to="/login"><button className='btn btn-primary'>Log In</button></Link></li>
                        
                        }
                     
@@ -55,15 +55,18 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-end hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">
+                        {user?.email && <p className='flex items-center text-red-900 font-bold'>Welcome, {user?.email}</p>}
+
+
                         <li><Link to="/">Home</Link></li>
                       
                         <li><Link to="/blog">Blog</Link></li>
                         {user?.email ? <>
                             <li><Link to="">Dashboard</Link></li>
-                            <li><Link to=""><button className='btn btn-primary'>Log Out</button></Link></li> 
+                            <li><Link to="/login"><button className='btn btn-primary' onClick={handleSignOut}>Log Out</button></Link></li> 
                             
                         </> :
-                            <li><Link to=""><button className='btn btn-primary' >Log In</button></Link></li>
+                            <li><Link to="/login"><button className='btn btn-primary' >Log In</button></Link></li>
                        
                        }
                     
