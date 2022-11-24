@@ -38,7 +38,7 @@ const AllUsers = () => {
                                 <th>{i + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
-                                <td>{user.isSeller}</td>
+                                <td>{user?.isSeller && <p>Seller</p>}</td>
                                 <td><button className='btn btn-primary btn-sm'>Verify</button></td>
                             </tr>
                   

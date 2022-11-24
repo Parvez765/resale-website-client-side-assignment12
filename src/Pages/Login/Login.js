@@ -1,10 +1,14 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import Swal from 'sweetalert2'
 
 const Login = () => {
+
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname || "/"
 
     const {googleSignIn, userLogin} = useContext(AuthContext)
     const googleProvider = new GoogleAuthProvider()
@@ -19,11 +23,13 @@ const Login = () => {
         userLogin(email, password)
             .then(result => {
                 const user = result.user
+                navigate(from, { replace: true })
                 Swal.fire(
                     'Congratulation!',
                     'User Created Successfully!',
                     'success'
-                  )
+                )
+               
             })
         .catch(err=> console.error(err))
 
@@ -32,11 +38,13 @@ const Login = () => {
     const handleGoogleSignIn = () => {
         googleSignIn(googleProvider)
             .then(result => {
+                navigate(from, { replace: true })
                 Swal.fire(
                     'Congratulation!',
                     'User Created Successfully!',
                     'success'
-                  )
+                )
+               
             })
         .catch(err=> console.error(err))
     }

@@ -5,6 +5,7 @@ import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import Login from "../Pages/Login/Login";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import Error from "../Shared/Error/Error";
 import Signup from "../Signup/Signup";
 
@@ -32,7 +33,7 @@ export const router = createBrowserRouter([
                 loader: ({ params }) => {
                     return fetch(`http://localhost:5000/categories/${params.categoryId}`)
                 },
-                element: <ProductDetails></ProductDetails>
+                element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>
             }
         ]
     },
