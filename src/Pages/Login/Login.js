@@ -23,8 +23,9 @@ const Login = () => {
         userLogin(email, password)
             .then(result => {
                 const user = result.user
-                navigate(from, { replace: true })
+                
                 JwtToken(user.email)
+                navigate(from, { replace: true })
                 Swal.fire(
                     'Congratulation!',
                     'User Created Successfully!',
@@ -41,7 +42,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user
                 JwtToken(user.email)
-               
+                navigate(from, { replace: true })
                 Swal.fire(
                     'Congratulation!',
                     'User Created Successfully!',
@@ -59,7 +60,7 @@ const Login = () => {
             .then(data => {
                 if (data.accessToken) {
                     localStorage.setItem("accessToken", data.accessToken)
-                    navigate(from, { replace: true })
+                    
             }
         })
     }

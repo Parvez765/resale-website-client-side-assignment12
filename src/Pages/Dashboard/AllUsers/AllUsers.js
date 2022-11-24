@@ -1,22 +1,31 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 
 const AllUsers = () => {
 
-    const [users, setUsers] = useState([])
+    
 
-    useEffect(() => {
-        fetch(`http://localhost:5000/users`, {
-            headers: {
-                authorization : `bearer ${localStorage.getItem("accessToken")}`
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                setUsers(data)
-            })
+
+    const { data: users = [], isLoading } = useQuery({
+        queryKey: ['users'],
+        queryFn: () => 
+            fetch(`http://localhost:5000/users`)
+                .then(res => res.json())
         
-    }, [])
+        
+    })
+    
+    if (isLoading) {
+        return <button type="button" class="bg-indigo-500 ..." disabled>
+        <svg class="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
+         
+        </svg>
+        Processing...
+      </button>
+    }
+   
+
+    
 
     return (
         <div>
@@ -36,8 +45,8 @@ const AllUsers = () => {
                     </thead>
                     <tbody>
                    
-                    {
-                        users.map((user, i) => <>
+                    { 
+                        users?.map((user, i) => <>
                             <tr key={user._id}>
                                 <th>{i + 1}</th>
                                 <td>{user.name}</td>
@@ -52,6 +61,7 @@ const AllUsers = () => {
                     </tbody>
                 </table>
                 </div>
+               
             </div>
         </div>
     );
