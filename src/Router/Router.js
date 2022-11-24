@@ -1,5 +1,6 @@
 import DashboardLayout from "../Layout/DashboardLayout";
 import Blog from "../Pages/Blog/Blog";
+import AddedProduct from "../Pages/Dashboard/AddedProduct/AddedProduct";
 import AddProduct from "../Pages/Dashboard/AddProduct/AddProduct";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../Pages/Dashboard/Dashboard";
@@ -47,6 +48,9 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/dashboard/allusers", element: <AllUsers></AllUsers>
+            },
+            {
+                path: "/dashboard/addproducts", element: <AddedProduct></AddedProduct>
             }
         ]
     }

@@ -11,10 +11,15 @@ const AllUsers = () => {
         queryFn: () => 
             fetch(`http://localhost:5000/users`)
                 .then(res => res.json())
-        
+
+                // , {
+                //     headers: {
+                //         authorization : `bearer ${localStorage.getItem("accessToken")}`
+                //     }
+                // }
         
     })
-    
+
     if (isLoading) {
         return <button type="button" class="bg-indigo-500 ..." disabled>
         <svg class="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
@@ -25,7 +30,7 @@ const AllUsers = () => {
     }
    
 
-    
+    console.log("userdata" ,users)
 
     return (
         <div>

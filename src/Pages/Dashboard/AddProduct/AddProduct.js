@@ -34,6 +34,7 @@ const AddProduct = () => {
         const form = event.target
         const sellerName = form.name.value
         const options = form.options.value
+        console.log(options)
         const productName = form.productName.value
         const originalPrice = form.originalPrice.value
         const sellingPrice = form.sellingPrice.value
@@ -63,7 +64,7 @@ const AddProduct = () => {
             .then(imgData => {
                 if (imgData.success) {
                     const products = {
-                    sellerName, options, productName, originalPrice, sellingPrice, usagesTime, postingTime, location, image : imgData.data.url
+                    sellerName, options, productName, originalPrice, sellingPrice, usagesTime, postingTime, location, image : imgData.data.url,  isAdvertized : false
                     }
                     fetch(`http://localhost:5000/dashboard/addproducts`, {
                         method: "POST",
