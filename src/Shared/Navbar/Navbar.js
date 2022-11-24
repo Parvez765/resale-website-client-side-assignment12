@@ -14,7 +14,8 @@ const Navbar = () => {
                 Swal.fire(
                     'User Logout Successfully!',
                     'success'
-                  )
+                )
+                localStorage.removeItem("accessToken")
             })
         .catch(err => console.error(err))
     }
