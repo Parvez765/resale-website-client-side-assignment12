@@ -1,11 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useContext } from 'react';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const AddProduct = () => {
 
     
+    const {user} = useContext(AuthContext)
 
+    console.log("User data", user)
     const { data: categoryList } = useQuery({
         queryKey: ["categories"],
         queryFn: () =>
@@ -25,7 +28,6 @@ const AddProduct = () => {
     // console.log(categoryList)
     
     const handlePost = event => {
-
 
 
         event.preventDefault()
@@ -97,10 +99,14 @@ const AddProduct = () => {
                 <form onSubmit={handlePost}>
                     
                 <div className="form-control w-full max-w-xs container mx-auto">
-                   <select name="seller" className="select select-bordered">
+                   
+                        {
+                            user?.isSeller && <input type="text" name="name" value={user._id}/>
+                        } 
+                        <select name="name" className="select select-bordered">
                        
                             {
-                                sellerList?.map(seller => <>
+                                sellerList?.map(seller=> <>
                                     <option value = {seller._id}>{seller.name}</option>
                         
                                 </>)

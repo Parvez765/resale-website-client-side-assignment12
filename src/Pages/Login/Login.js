@@ -6,13 +6,27 @@ import Swal from 'sweetalert2'
 
 const Login = () => {
 
-    const {googleSignIn} = useContext(AuthContext)
+    const {googleSignIn, userLogin} = useContext(AuthContext)
     const googleProvider = new GoogleAuthProvider()
 
     const handleLogin = event => {
         event.preventDefault()
-        const options = event.target.options.value
-        console.log(options)
+        const form = event.target
+        const email = form.email.value
+        const password = form.password.value
+        const options = form.options.value
+
+        userLogin(email, password)
+            .then(result => {
+                const user = result.user
+                Swal.fire(
+                    'Congratulation!',
+                    'User Created Successfully!',
+                    'success'
+                  )
+            })
+        .catch(err=> console.error(err))
+
     }
 
     const handleGoogleSignIn = () => {

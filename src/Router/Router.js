@@ -1,6 +1,7 @@
 import DashboardLayout from "../Layout/DashboardLayout";
 import Blog from "../Pages/Blog/Blog";
 import AddProduct from "../Pages/Dashboard/AddProduct/AddProduct";
+import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import Login from "../Pages/Login/Login";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
@@ -42,6 +43,9 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/dashboard/addproduct", element : <AddProduct></AddProduct>
+            },
+            {
+                path: "/dashboard/allusers", element: <AllUsers></AllUsers>
             }
         ]
     }
