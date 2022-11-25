@@ -1,35 +1,42 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 
 const AllUsers = () => {
 
     
+    const [users, setUsers] = useState([])
 
-
-    const { data: users = [], isLoading } = useQuery({
-        queryKey: ['users'],
-        queryFn: () => 
-            fetch(`http://localhost:5000/users`)
-                .then(res => res.json())
-
-                // , {
-                //     headers: {
-                //         authorization : `bearer ${localStorage.getItem("accessToken")}`
-                //     }
-                // }
-        
-    })
-    console.log(users)
-
-    if (isLoading) {
-        return <button type="button" class="bg-indigo-500 ..." disabled>
-        <svg class="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
-         
-        </svg>
-        Processing...
-      </button>
+    
+    const fetchUser = () => {
+        fetch(`http://localhost:5000/users`)
+            .then(res => res.json())
+            .then(data => {
+            setUsers(data)
+        })
     }
-   
+    
+    useEffect(() => {
+        fetchUser()
+    }, [])
+    
+    const handleDelete = (id) => {
+        fetch(`http://localhost:5000/users/${id}`, {
+            method: "DELETE"
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged === true) {
+                    Swal.fire(
+                        'Congratulation!',
+                        'User Deleted Successfully!',
+                        'success'
+                    )
+                    fetchUser()
+                }
+            })
+        
+    }
 
     console.log("userdata" ,users)
 
@@ -47,6 +54,8 @@ const AllUsers = () => {
                         <th>Email</th>
                         <th>Seller</th>
                         <th>Status</th>
+                        <th>Activity</th>
+                        
                     </tr>
                     </thead>
                     <tbody>
@@ -58,7 +67,8 @@ const AllUsers = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user?.isSeller && <p>Seller</p>}</td>
-                                <td><button className='btn btn-primary btn-sm'>Verify</button></td>
+                                <td>{user?.isSeller ?  "Added As A Seller" : <button className='btn btn-primary btn-sm'>Verify</button>}</td>
+                                <td><button className='btn btn-primary btn-sm' onClick={()=> handleDelete(user._id)}>Delete</button></td>
                             </tr>
                   
                         </>)
