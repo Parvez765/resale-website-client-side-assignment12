@@ -1,9 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useEffect, useState } from 'react';
+import { useNavigation } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
-const ProductDetailsModal = ({ booking}) => {
+const ProductDetailsModal = ({ booking }) => {
+    const navigate = useNavigation()
     const { user } = useContext(AuthContext)
 
     const { originalPrice, sellingPrice, productDescription, usagesTime, location, conditions, productName} = booking
@@ -30,6 +32,7 @@ const ProductDetailsModal = ({ booking}) => {
             'success'
         )
         bookingConfirmation()
+        navigate("/dashboard")
           
     }
 
