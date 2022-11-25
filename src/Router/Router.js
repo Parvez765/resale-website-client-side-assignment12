@@ -6,6 +6,7 @@ import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import Login from "../Pages/Login/Login";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
+import AdminRoute from "../PrivateRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import Error from "../Shared/Error/Error";
 import Signup from "../Signup/Signup";
@@ -47,7 +48,7 @@ export const router = createBrowserRouter([
                 path: "/dashboard/addproduct", element : <AddProduct></AddProduct>
             },
             {
-                path: "/dashboard/allusers", element: <AllUsers></AllUsers>
+                path: "/dashboard/allusers", element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
             {
                 path: "/dashboard/addproducts", element: <AddedProduct></AddedProduct>

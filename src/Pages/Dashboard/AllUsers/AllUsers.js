@@ -19,6 +19,7 @@ const AllUsers = () => {
                 // }
         
     })
+    console.log(users)
 
     if (isLoading) {
         return <button type="button" class="bg-indigo-500 ..." disabled>

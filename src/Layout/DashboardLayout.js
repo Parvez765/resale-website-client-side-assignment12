@@ -16,6 +16,14 @@ const DashboardLayout = () => {
         
         
     })
+    const { data: adminList } = useQuery({
+        queryKey: ["admin"],
+        queryFn: () =>
+            fetch(`http://localhost:5000/admin`)
+                .then(res => res.json())
+        
+        
+    })
 
 
     return (
@@ -33,13 +41,16 @@ const DashboardLayout = () => {
                     <ul className="menu p-4 w-80 bg-base-100 text-base-content">
                   
                     <li><Link to="/dashboard">My Order</Link></li>
-                    { sellerList.find(seller => user.email === seller.email) &&
+                    { sellerList?.find(seller => user.email === seller.email) &&
                             <>
                                 <li><Link to="/dashboard/addproduct">Add Product</Link></li>
                                 <li><Link to="/dashboard/addproducts">My Product</Link></li>
                             </>        
                    }
-                    <li><Link to="/dashboard/allusers">All Users</Link></li>
+                    { adminList?.find(admin => user.email === admin.email) &&
+                            <li><Link to="/dashboard/allusers">All Users</Link></li>
+                   }
+                   
                     </ul>
                 
                 </div>
