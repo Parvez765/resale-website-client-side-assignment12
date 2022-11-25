@@ -94,7 +94,8 @@ const AddProduct = () => {
                     fetch(`http://localhost:5000/dashboard/addproducts`, {
                         method: "POST",
                         headers: {
-                            "content-type" : "application/json"
+                            "content-type": "application/json",
+                            authorization : `bearer ${localStorage.getItem("accessToken")}`
                         },
                         body: JSON.stringify(products)
                     })
@@ -117,7 +118,7 @@ const AddProduct = () => {
     }
 
 
-    console.log("aaaaaa", userDetail)
+    // console.log("aaaaaa", userDetail)
     return (
         <div>
             <h2 className='text-3xl font-bold'>Please Add Product You Want to Sell</h2>

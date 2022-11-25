@@ -7,7 +7,11 @@ const AddedProduct = () => {
 
     const [products, setProducts] = useState([])
 
-    axios.get(`http://localhost:5000/dashboard/addproducts`)
+    axios.get(`http://localhost:5000/dashboard/addproducts`, {
+        headers: {
+            authorization : `bearer ${localStorage.getItem("accessToken")}`
+        }
+    })
         .then(response => {
             // console.log(response.data)
             setProducts(response.data)

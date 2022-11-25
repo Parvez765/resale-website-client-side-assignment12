@@ -6,7 +6,11 @@ const Dashboard = () => {
     const [bookings, setBookings] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/bookings?email=${user?.email}`)
+        fetch(`http://localhost:5000/bookings?email=${user?.email}`, {
+            headers: {
+                authorization: `bearer ${localStorage.getItem("accessToken")}`
+            }
+        })
             .then(res => res.json())
             .then(data => {
                 console.log(data)
