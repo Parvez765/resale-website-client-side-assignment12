@@ -1,14 +1,29 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const AddProduct = () => {
 
+    const [userDetail, setUserDetail] = useState({})
     
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
+    
+    useEffect(() => {
+        fetch(`http://localhost:5000/user?email=${user.email}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log("This is Data", data)
+                setUserDetail(data)
+            })
+        
 
-    console.log("User data", user)
+    }, [user?.email !== undefined])
+
+    
+
+    // console.log("User data", user.email)
     const { data: categoryList } = useQuery({
         queryKey: ["categories"],
         queryFn: () =>
@@ -25,22 +40,32 @@ const AddProduct = () => {
         
         
     })
+
     // console.log(categoryList)
+    const navigate = useNavigate()
     
     const handlePost = event => {
+
 
 
         event.preventDefault()
         const form = event.target
         const sellerName = form.name.value
+        
         const options = form.options.value
-        console.log(options)
+        console.log("This is" ,options)
         const productName = form.productName.value
         const originalPrice = form.originalPrice.value
         const sellingPrice = form.sellingPrice.value
         const usagesTime = form.usagesTime.value
         const postingTime = new Date().toLocaleString()
-        console.log(postingTime)
+        const conditions = form.condition.value
+        console.log("conditions", conditions)
+        const purchage = form.purchage.value
+        const phone = form.number.value
+        const productDescription = form.productDescription.value
+
+        // console.log(postingTime)
         const location = form.location.value
 
         // const user = { sellerName, options, productName, originalPrice, sellingPrice, usagesTime, postingTime, location }
@@ -49,7 +74,7 @@ const AddProduct = () => {
         const image = form.img.files[0]
 
         const imgbbKey = process.env.REACT_APP_imgbb_host_key
-        console.log("This is" ,imgbbKey)
+        // console.log("This is" ,imgbbKey)
         
         const formData = new FormData()
         formData.append("image", image)
@@ -64,7 +89,7 @@ const AddProduct = () => {
             .then(imgData => {
                 if (imgData.success) {
                     const products = {
-                    sellerName, options, productName, originalPrice, sellingPrice, usagesTime, postingTime, location, image : imgData.data.url,  isAdvertized : false
+                    sellerName, options, productName, originalPrice, sellingPrice, usagesTime, postingTime, location, image : imgData.data.url,  isAdvertized : false, conditions, purchage, phone, productDescription
                     }
                     fetch(`http://localhost:5000/dashboard/addproducts`, {
                         method: "POST",
@@ -77,9 +102,8 @@ const AddProduct = () => {
                         .then(data => {
                             if (data.acknowledged) {
                                 Swal.fire(
-                                    
-                                    'Product Addedd Successfully',
-                                  
+                                   'Product Addedd Successfully',
+                                    navigate("/dashboard/addproducts")
                                   )
                             }
                         })
@@ -99,20 +123,25 @@ const AddProduct = () => {
             <div className='mt-10'>
                 <form onSubmit={handlePost}>
                     
-                <div className="form-control w-full max-w-xs container mx-auto">
+                <div className="form-control w-full max-w-xs container mx-auto mb-10">
                    
                         {
-                            user?.isSeller && <input type="text" name="name" value={user._id}/>
+                            userDetail?.isSeller ? <>
+                                <input type="hidden" name="name" value={userDetail._id} />
+                                <p>{userDetail.name}</p>
+                            
+                            </> : 
+                                <select name="name" className="select select-bordered">
+                            
+                                    {
+                                        sellerList?.map(seller=> <>
+                                            <option value = {seller._id}>{seller.name}</option>
+                                
+                                        </>)
+                                    }
+                                </select>
+                                
                         } 
-                        <select name="name" className="select select-bordered">
-                       
-                            {
-                                sellerList?.map(seller=> <>
-                                    <option value = {seller._id}>{seller.name}</option>
-                        
-                                </>)
-                       }
-                    </select>
                 </div>
                 <div className="form-control w-full max-w-xs container mx-auto">
                     <label className="label">
@@ -142,19 +171,41 @@ const AddProduct = () => {
                     </div>
                     <div className="form-control w-full max-w-xs container mx-auto">
                         <label className="label">
+                            <span className="label-text">Product Descriptin</span>
+                        </label>
+                        <input type="text" name="productDescription" placeholder="description" className="input input-bordered  w-full max-w-xs" />
+                    </div>
+                    <div className="form-control w-full max-w-xs container mx-auto">
+                        <label className="label">
                             <span className="label-text">Original Price</span>
                         </label>
                         <input type="text" placeholder="Price" name="originalPrice" className="input input-bordered  w-full max-w-xs" />
                     </div>
                     <div className="form-control w-full max-w-xs container mx-auto">
                         <label className="label">
-                            <span className="label-text">Selling Price Price</span>
+                            <span className="label-text">Selling Price</span>
                         </label>
                         <input type="text" placeholder="Price" name="sellingPrice" className="input input-bordered  w-full max-w-xs" />
                     </div>
                     <div className="form-control w-full max-w-xs container mx-auto">
                         <label className="label">
-                            <span className="label-text" name="sellingPrice">Usages Time</span>
+                            <span className="label-text">Product Condition</span>
+                        </label>
+                        <select name="condition" className="select select-bordered w-full max-w-xs">
+                        <option selected>Excellent</option>
+                        <option>Good</option>
+                        <option>Fair</option>
+                        </select>
+                        </div>
+                    <div className="form-control w-full max-w-xs container mx-auto">
+                        <label className="label">
+                            <span className="label-text">Year of Purchages</span>
+                        </label>
+                        <input type="text" placeholder="Usages Time" name="purchage" className="input input-bordered  w-full max-w-xs" />
+                    </div>
+                    <div className="form-control w-full max-w-xs container mx-auto">
+                        <label className="label">
+                            <span className="label-text" >Usages Time</span>
                         </label>
                         <input type="text" placeholder="Usages Time" name="usagesTime" className="input input-bordered  w-full max-w-xs" />
                     </div>
@@ -165,7 +216,13 @@ const AddProduct = () => {
                         </label>
                         <input type="text" placeholder="location" name="location" className="input input-bordered  w-full max-w-xs" />
                     </div>
-                    <button className='btn btn-primary mt-10'>Post</button>
+                    <div className="form-control w-full max-w-xs container mx-auto">
+                        <label className="label">
+                            <span className="label-text">Mobile Number</span>
+                        </label>
+                        <input type="number" placeholder="Phone" name="number" className="input input-bordered  w-full max-w-xs" />
+                    </div>
+                    <button className='btn btn-primary mt-10 mb-10'>Post</button>
                 </form>
             </div>
         </div>
