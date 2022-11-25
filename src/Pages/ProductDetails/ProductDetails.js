@@ -2,8 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import { FaCheck } from 'react-icons/fa';
 import { useLoaderData } from 'react-router-dom';
+import ProductDetailsModal from './ProductDetailsModal/ProductDetailsModal';
 
 const ProductDetails = () => {
+
+    const[booking, setBoooking] = useState({})
 
     const products = useLoaderData()
     console.log(products)
@@ -27,6 +30,12 @@ const ProductDetails = () => {
         
         
     })
+
+    const handlBooking = (product) => {
+        console.log(product)
+        setBoooking(product)
+    }
+    console.log("My", booking)
    
 
     return (
@@ -49,7 +58,8 @@ const ProductDetails = () => {
                                 <h2 className="text-center font-bold">Description: {product.productDescription}</h2>
                                 <h2 className="text-center font-bold">Location: {product.location}</h2>
                                 <div className="card-actions justify-end">
-                               {sellerList?.find(seller => seller._id === product.sellerName).isVerified && <button className='btn btn-primary'>Book Now</button>}
+                               {sellerList?.find(seller => seller._id === product.sellerName).isVerified && <label onClick={()=> handlBooking(product)} htmlFor="product-details" className="btn btn-primary">Book Now</label>}
+                                <ProductDetailsModal product= {product} booking={booking}></ProductDetailsModal>
                                 </div>
                             </div>
                         </div>

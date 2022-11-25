@@ -13,9 +13,9 @@ const AddProduct = () => {
     useEffect(() => {
         fetch(`http://localhost:5000/user?email=${user.email}`)
             .then(res => res.json())
-            .then(data => {
-                console.log("This is Data", data)
-                setUserDetail(data)
+            .then(dal => {
+                console.log("This is Data", dal)
+                setUserDetail(dal)
             })
         
 
@@ -117,6 +117,7 @@ const AddProduct = () => {
     }
 
 
+    console.log("aaaaaa", userDetail)
     return (
         <div>
             <h2 className='text-3xl font-bold'>Please Add Product You Want to Sell</h2>
