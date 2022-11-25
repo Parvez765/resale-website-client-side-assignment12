@@ -38,6 +38,26 @@ const AllUsers = () => {
         
     }
 
+    // Update Seller
+    const handleUpdate = (id) => {
+        fetch(`http://localhost:5000/users/${id}`, {
+            method: "PUT"
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged === true) {
+                   
+                        Swal.fire(
+                            'Congratulation!',
+                            'User Deleted Successfully!',
+                            'success'
+                        )
+                        fetchUser()
+                    
+            }
+        })
+    }
+
     console.log("userdata" ,users)
 
     return (
@@ -67,7 +87,7 @@ const AllUsers = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user?.isSeller && <p>Seller</p>}</td>
-                                <td>{user?.isSeller ?  "Added As A Seller" : <button className='btn btn-primary btn-sm'>Verify</button>}</td>
+                                <td>{user?.isSeller && !user?.isVerified &&  <button className='btn btn-primary btn-sm' onClick={()=> handleUpdate(user._id)}>Verify</button>}</td>
                                 <td><button className='btn btn-primary btn-sm' onClick={()=> handleDelete(user._id)}>Delete</button></td>
                             </tr>
                   
