@@ -40,7 +40,14 @@ const ProductDetails = () => {
                             <div className="card-body">
                                 <h2 className="text-center font-bold">{product.productName}</h2>
                                  <p>Category: {categoryList?.find(category => category._id === product.options).categoryName }</p>
-                                <p className='flex items-center justify-evenly'>Seller: {sellerList?.find(seller => seller._id === product.sellerName).name} <FaCheck className='' style={sellerList?.find(seller => seller._id === product.sellerName).isVerified && {color: "blue"}} /> </p> 
+                                <p className='flex items-center justify-evenly'>Seller: {sellerList?.find(seller => seller._id === product.sellerName).name} <FaCheck className='' style={sellerList?.find(seller => seller._id === product.sellerName).isVerified && { color: "blue" }} /> </p> 
+                                <h2 className="text-center font-bold">Orizinal Price: {product.originalPrice}</h2>
+                                <h2 className="text-center font-bold">Selling Price: {product.sellingPrice}</h2>
+                                <h2 className="text-center font-bold">Product Added Time: {product.postingTime}</h2>
+                                <h2 className="text-center font-bold">Product Buying Time: {product.purchage}</h2>
+                                <h2 className="text-center font-bold">Usages Time: {product.usagesTime}</h2>
+                                <h2 className="text-center font-bold">Description: {product.productDescription}</h2>
+                                <h2 className="text-center font-bold">Location: {product.location}</h2>
                                 <div className="card-actions justify-end">
                                {sellerList?.find(seller => seller._id === product.sellerName).isVerified && <button className='btn btn-primary'>Book Now</button>}
                                 </div>
