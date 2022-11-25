@@ -6,7 +6,7 @@ import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 const ProductDetailsModal = ({ booking}) => {
     const { user } = useContext(AuthContext)
 
-    const { originalPrice, sellingPrice, productDescription, usagesTime, postingTime, location, conditions, productName, _id} = booking
+    const { originalPrice, sellingPrice, productDescription, usagesTime, location, conditions, productName} = booking
     
     console.log("This is",booking)
 
@@ -28,7 +28,28 @@ const ProductDetailsModal = ({ booking}) => {
             'Congratulation!',
             'Product Booking Successfull!',
             'success'
-          )
+        )
+        bookingConfirmation()
+          
+    }
+
+    const bookingConfirmation = () => {
+        const bookedPhone = {
+            originalPrice, sellingPrice, productDescription, usagesTime, location, conditions, productName,
+            email: user?.email
+        }
+        fetch(`http://localhost:5000/bookings`, {
+            method: "POST",
+            headers: {
+                "content-type" : "application/json"
+            },
+            body: JSON.stringify(bookedPhone)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                
+        })
     }
 
   
@@ -51,6 +72,7 @@ const ProductDetailsModal = ({ booking}) => {
                     <p className="py-4">Product Selling Price: {sellingPrice} BDT</p>
                     <p className="py-4">Product Usages Time: {usagesTime}</p>
                     <p className="py-4">Condition: {conditions}</p>
+                    <p className="py-4">Location: {location}</p>
                    <button onClick={handleBookProduct} className='btn btn-primary'>Book Your Desire Product</button>
             </div>
             </div>
