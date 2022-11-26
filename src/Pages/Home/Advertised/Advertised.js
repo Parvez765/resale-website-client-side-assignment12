@@ -1,9 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Advertised = () => {
+
+    const [advertised, setAdvertised] = useState([])
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/advertiseProduct`)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                setAdvertised(data)
+            })
+    }, [])
+    
     return (
         <div>
             <h2 className='text-3xl font-bold mb-10'>Advertised Product</h2>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 container mx-auto justify-items-center mt-10 mb-10'>
+                {
+                    advertised.map(adItem => <>
+                        <div className="card w-96 bg-base-100 shadow-xl">
+                            <figure><img src={adItem.image} alt="Shoes" /></figure>
+                            <div className="card-body">
+                                <h2 className="text-center font-bold text-2xl">{adItem.productName}</h2>
+                                <p>{adItem.productDescription}</p>
+                                <p>Purchage Year: {adItem.purchage}</p>
+                                <p>Original Price: {adItem.originalPrice}</p>
+                                <p>Selling Price: {adItem.sellingPrice}</p>
+                                <div className="card-actions justify-end">
+                                <button className="btn btn-primary">Book Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </>)
+                }
+            </div>
         </div>
     );
 };

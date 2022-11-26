@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import axios from "axios";
 import { useQuery } from '@tanstack/react-query';
 import { FaCheck } from "react-icons/fa";
+import Swal from 'sweetalert2';
 
 const AddedProduct = () => {
 
     const [products, setProducts] = useState([])
+    
 
     axios.get(`http://localhost:5000/dashboard/addproducts`, {
         headers: {
@@ -39,6 +41,28 @@ const AddedProduct = () => {
         
     })
 
+
+    // Advertised Product
+    
+        
+        const handleupdate = (id) => {
+            fetch(`http://localhost:5000/advertised/${id}`, {
+                method: "PUT"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.acknowledged === true) {
+                        Swal.fire(
+                            'Congratulation!',
+                            'Product Successfully Advertised!',
+                            'success'
+                          )
+                   }
+                    
+            })
+        }
+    
+
     return (
         <div>
             <h2 className='text-3xl font-bold mt-10'>List Of Products You Added</h2>
@@ -59,7 +83,10 @@ const AddedProduct = () => {
                                 <h2 className="text-center font-bold">Description: {product.productDescription}</h2>
                                 <h2 className="text-center font-bold">Location: {product.location}</h2>
                                 <div className="card-actions justify-end">
-                                <button className="btn btn-primary">Advertize</button>
+                                    <div>
+                                        <button onClick={()=>handleupdate(product._id)} className="btn btn-primary">Advertize</button>
+                                        <button className="btn btn-ghost">Delete</button>     
+                                    </div>
                                 </div>
                             </div>
                         </div>
