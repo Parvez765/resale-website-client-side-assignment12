@@ -9,7 +9,7 @@ const AddedProduct = () => {
     const [products, setProducts] = useState([])
     
 
-    axios.get(`http://localhost:5000/dashboard/addproducts`, {
+    axios.get(` https://assignment-12-server-side.vercel.app/dashboard/addproducts`, {
         headers: {
             authorization : `bearer ${localStorage.getItem("accessToken")}`
         }
@@ -25,7 +25,7 @@ const AddedProduct = () => {
     const { data: categoryList } = useQuery({
         queryKey: ["categories"],
         queryFn: () =>
-            fetch(`http://localhost:5000/categories`)
+            fetch(` https://assignment-12-server-side.vercel.app/categories`)
                 .then(res => res.json())
         
         
@@ -35,7 +35,7 @@ const AddedProduct = () => {
     const { data: sellerList } = useQuery({
         queryKey: ["seller"],
         queryFn: () =>
-            fetch(`http://localhost:5000/seller`)
+            fetch(` https://assignment-12-server-side.vercel.app/seller`)
                 .then(res => res.json())
         
         
@@ -46,7 +46,7 @@ const AddedProduct = () => {
     
         
         const handleupdate = (id) => {
-            fetch(`http://localhost:5000/advertised/${id}`, {
+            fetch(` https://assignment-12-server-side.vercel.app/advertised/${id}`, {
                 method: "PUT",
                 headers: {
                     authorization: `bearer ${localStorage.getItem("accessToken")}`
@@ -66,7 +66,7 @@ const AddedProduct = () => {
     }
 
     const fetchDelete = (id) => {
-        fetch(`http://localhost:5000/products/${id}`, {
+        fetch(` https://assignment-12-server-side.vercel.app/products/${id}`, {
             method: "DELETE", 
             headers: {
                 authorization: `bearer ${localStorage.getItem("accessToken")}`

@@ -9,7 +9,7 @@ const Advertised = () => {
     const [advertised, setAdvertised] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/advertiseProduct`)
+        fetch(` https://assignment-12-server-side.vercel.app/advertiseProduct`)
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -23,7 +23,7 @@ const Advertised = () => {
 
         const addedProducts = {adItem, email: user?.email}
 
-        fetch(`http://localhost:5000/wishlist`, {
+        fetch(` https://assignment-12-server-side.vercel.app/wishlist`, {
             method: "POST",
             headers: {
                 "content-type" : "application/json"

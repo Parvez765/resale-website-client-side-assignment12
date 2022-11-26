@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
             {
                 path: "/categories/:categoryId",
                 loader: ({ params }) => {
-                    return fetch(`http://localhost:5000/categories/${params.categoryId}`)
+                    return fetch(` https://assignment-12-server-side.vercel.app/categories/${params.categoryId}`)
                 },
                 element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>
             }

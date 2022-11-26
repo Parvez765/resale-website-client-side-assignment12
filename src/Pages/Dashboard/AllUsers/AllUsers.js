@@ -9,7 +9,7 @@ const AllUsers = () => {
 
     
     const fetchUser = () => {
-        fetch(`http://localhost:5000/users`)
+        fetch(` https://assignment-12-server-side.vercel.app/users`)
             .then(res => res.json())
             .then(data => {
             setUsers(data)
@@ -21,7 +21,7 @@ const AllUsers = () => {
     }, [])
     
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/users/${id}`, {
+        fetch(` https://assignment-12-server-side.vercel.app/users/${id}`, {
             method: "DELETE"
         })
             .then(res => res.json())
@@ -40,7 +40,7 @@ const AllUsers = () => {
 
     // Update Seller
     const handleUpdate = (id) => {
-        fetch(`http://localhost:5000/users/${id}`, {
+        fetch(` https://assignment-12-server-side.vercel.app/users/${id}`, {
             method: "PUT"
         })
             .then(res => res.json())

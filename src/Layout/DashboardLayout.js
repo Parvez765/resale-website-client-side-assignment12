@@ -11,7 +11,7 @@ const DashboardLayout = () => {
     const { data: sellerList } = useQuery({
         queryKey: ["seller"],
         queryFn: () =>
-            fetch(`http://localhost:5000/seller`)
+            fetch(` https://assignment-12-server-side.vercel.app/seller`)
                 .then(res => res.json())
         
         
@@ -19,7 +19,7 @@ const DashboardLayout = () => {
     const { data: adminList } = useQuery({
         queryKey: ["admin"],
         queryFn: () =>
-            fetch(`http://localhost:5000/admin`)
+            fetch(` https://assignment-12-server-side.vercel.app/admin`)
                 .then(res => res.json())
         
         

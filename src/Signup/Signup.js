@@ -3,11 +3,12 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../Context/AuthProvider/AuthProvider';
 import Swal from 'sweetalert2'
 import { GoogleAuthProvider } from 'firebase/auth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import app from '../firebase/firebase.config';
 
 
 const Signup = () => {
+    const navigate = useNavigate()
 
     const [seller, setSeller] = useState(false)
 
@@ -31,8 +32,9 @@ const Signup = () => {
         createUser(email, password)
             .then(result => {
                 const user = result.user
+                console.log(user)
+                JwtToken(user?.email)
                 signupuserInfo(name, email, seller)
-                JwtToken(user.email)
                 Swal.fire(
                     'Congratulation!',
                     'User Created Successfully!',
@@ -63,11 +65,12 @@ const Signup = () => {
 
      // JWT Token
      const JwtToken = (email) => {
-        fetch(`http://localhost:5000/jwt?email=${email}`)
+        fetch(` https://assignment-12-server-side.vercel.app/jwt?email=${user?.email}`)
             .then(res => res.json())
             .then(data => {
                 if (data.accessToken) {
-                localStorage.setItem("accessToken", data.accessToken)
+                    localStorage.setItem("accessToken", data.accessToken)
+                    navigate("/")
             }
         })
     }
@@ -77,7 +80,7 @@ const Signup = () => {
     // Sending User Info At Databse
     const signupuserInfo = (name, email, isSeller, isVerified = false) => {
         const user = { name, email, isSeller, isVerified }
-        fetch(`http://localhost:5000/users`, {
+        fetch(` https://assignment-12-server-side.vercel.app/users`, {
             method: "POST",
             headers: {
                 "content-type" : "application/json"
@@ -88,7 +91,7 @@ const Signup = () => {
     
     const googleuserInfo = (displayName, email) => {
         const user = { displayName, email }
-        fetch(`http://localhost:5000/users`, {
+        fetch(` https://assignment-12-server-side.vercel.app/users`, {
             method: "POST",
             headers: {
                 "content-type" : "application/json"

@@ -19,7 +19,7 @@ const ProductDetailsModal = ({ booking }) => {
     const { data: categoryList } = useQuery({
         queryKey: ["categories"],
         queryFn: () =>
-            fetch(`http://localhost:5000/categories`)
+            fetch(` https://assignment-12-server-side.vercel.app/categories`)
                 .then(res => res.json())
         
         
@@ -41,7 +41,7 @@ const ProductDetailsModal = ({ booking }) => {
             originalPrice, sellingPrice, productDescription, usagesTime, location, conditions, productName,
             email: user?.email, image
         }
-        fetch(`http://localhost:5000/bookings`, {
+        fetch(` https://assignment-12-server-side.vercel.app/bookings`, {
             method: "POST",
             headers: {
                 "content-type" : "application/json"

@@ -11,7 +11,7 @@ const AddProduct = () => {
     const { user } = useContext(AuthContext)
     
     useEffect(() => {
-        fetch(`http://localhost:5000/user?email=${user.email}`)
+        fetch(` https://assignment-12-server-side.vercel.app/user?email=${user.email}`)
             .then(res => res.json())
             .then(dal => {
                 console.log("This is Data", dal)
@@ -27,7 +27,7 @@ const AddProduct = () => {
     const { data: categoryList } = useQuery({
         queryKey: ["categories"],
         queryFn: () =>
-            fetch(`http://localhost:5000/categories`)
+            fetch(` https://assignment-12-server-side.vercel.app/categories`)
                 .then(res => res.json())
         
         
@@ -35,7 +35,7 @@ const AddProduct = () => {
     const { data: sellerList } = useQuery({
         queryKey: ["seller"],
         queryFn: () =>
-            fetch(`http://localhost:5000/seller`)
+            fetch(` https://assignment-12-server-side.vercel.app/seller`)
                 .then(res => res.json())
         
         
@@ -91,7 +91,7 @@ const AddProduct = () => {
                     const products = {
                     sellerName, options, productName, originalPrice, sellingPrice, usagesTime, postingTime, location, image : imgData.data.url,  isAdvertized : false, conditions, purchage, phone, productDescription
                     }
-                    fetch(`http://localhost:5000/dashboard/addproducts`, {
+                    fetch(` https://assignment-12-server-side.vercel.app/dashboard/addproducts`, {
                         method: "POST",
                         headers: {
                             "content-type": "application/json",

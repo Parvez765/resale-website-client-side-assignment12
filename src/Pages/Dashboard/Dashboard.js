@@ -7,10 +7,8 @@ const Dashboard = () => {
     const [bookings, setBookings] = useState([])
     const [wishLists, setWishList] = useState([])
 
-    
-
-    useEffect(() => {
-        fetch(`http://localhost:5000/bookings?email=${user?.email}`, {
+    const fecthBooking = () => {
+        fetch(` https://assignment-12-server-side.vercel.app/bookings?email=${user?.email}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem("accessToken")}`
             }
@@ -20,22 +18,27 @@ const Dashboard = () => {
                 // console.log(data)
                 setBookings(data)
             })
-        
-    }, [user?.email])
-
+    }
+    
     // WishList Api
-
+    const fetchWishlist = () => {
+        fetch(` https://assignment-12-server-side.vercel.app/wishlist?email=${user?.email}`)
+        .then(res => res.json())
+        .then(data => setWishList(data))
+    }
     useEffect(() => {
-        fetch(`http://localhost:5000/wishlist?email=${user?.email}`)
-            .then(res => res.json())
-            .then(data => setWishList(data))
+        fecthBooking()
+        fetchWishlist()
         
     }, [user?.email])
+
+
+    
     
 
     // Booking Delete Operation 
     const fetchDeleteBooking = (id) => {
-        fetch(`http://localhost:5000/bookings/${id}`, {
+        fetch(` https://assignment-12-server-side.vercel.app/bookings/${id}`, {
             method: "DELETE"
         })
             .then(res => res.json())
@@ -51,7 +54,10 @@ const Dashboard = () => {
     }
 
     const handleBookingDelete = (id) => {
-       fetchDeleteBooking(id)
+        fetchDeleteBooking(id)
+        fecthBooking ()
+        
+        
     }
 
 
@@ -59,7 +65,7 @@ const Dashboard = () => {
 
     // WishList Delete Operation
     const fetchDelete = (id) => {
-        fetch(`http://localhost:5000/wishlist/${id}`, {
+        fetch(` https://assignment-12-server-side.vercel.app/wishlist/${id}`, {
             method: "DELETE"
         })
             .then(res => res.json())
@@ -75,6 +81,7 @@ const Dashboard = () => {
     }
     const handleDelete = (id) => {
         fetchDelete(id)
+        fetchWishlist()
         
     }
     
@@ -95,6 +102,7 @@ const Dashboard = () => {
                             <th>Usages Time</th>
                             <th>Status</th>
                             <th>Delete</th>
+                            <th>Payment</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -114,7 +122,8 @@ const Dashboard = () => {
                                     <td>{booking.sellingPrice} BDT</td>
                                     <td>{booking.usagesTime}</td>
                                     <td>{!booking?.isBooked ? <button className='btn btn-primary'>Avaiable</button> : <button className='btn btn-outline'>Sold</button>}</td>
-                                    <td><button onClick={()=> handleBookingDelete(booking._id)} className="btn btn-sm">Delete</button></td>
+                                    <td><button onClick={() => handleBookingDelete(booking._id)} className="btn btn-sm">Delete</button></td>
+                                    <td><button className='btn btn-outline'>Pay</button></td>
                                 </tr>
                             </>)  
                          }
@@ -139,6 +148,7 @@ const Dashboard = () => {
                         <th>Usages Time</th>
                         <th>Status</th>
                         <th>Delete</th>
+                        <th>Payment</th>
                         
                     </tr>
                     </thead>
@@ -159,7 +169,8 @@ const Dashboard = () => {
                                     <td>{wishlist.adItem.sellingPrice} BDT</td>
                                     <td>{wishlist.adItem.usagesTime}</td>
                                     <td>{!wishlist?.adItem.isBooked ? <button className='btn btn-primary'>Avaiable</button> : <button className='btn btn-outline'>Sold</button>}</td>
-                                    <td><button onClick={()=> handleDelete(wishlist._id)} className="btn btn-sm">Delete</button></td>
+                                    <td><button onClick={() => handleDelete(wishlist._id)} className="btn btn-sm">Delete</button></td>
+                                    <td><button className='btn btn-outline'>Pay</button></td>
                                 </tr>
                             </>)  
                          }
