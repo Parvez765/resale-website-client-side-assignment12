@@ -49,7 +49,7 @@ const AllUsers = () => {
                    
                         Swal.fire(
                             'Congratulation!',
-                            'User Deleted Successfully!',
+                            'Seller Verified Successfully!',
                             'success'
                         )
                         fetchUser()

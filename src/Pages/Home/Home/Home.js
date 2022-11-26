@@ -1,6 +1,7 @@
 import React from 'react';
 import headerImg from "../../../assests/images/headerImg-01.png"
 import ProductCategory from '../../ProductCategory/ProductCategory';
+import Advertised from '../Advertised/Advertised';
 import SerachSection from '../SerachSection/SerachSection';
 
 const Home = () => {
@@ -18,6 +19,7 @@ const Home = () => {
             </div>
             <SerachSection></SerachSection>
             <ProductCategory></ProductCategory>
+            <Advertised></Advertised>
         </div>
     );
 };

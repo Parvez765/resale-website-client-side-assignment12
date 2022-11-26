@@ -19,6 +19,8 @@ const Dashboard = () => {
         
     }, [user?.email])
 
+    
+
     return (
         <div>
             <h2 className='text-2xl font-bold mb-10'>My Orders</h2>
@@ -37,7 +39,8 @@ const Dashboard = () => {
                     <tbody>
                  
                         {
-                            bookings.map((booking, i )=> <>
+                            bookings.map((booking, i) => <>
+                                
                                 <tr>
                                     <th>{i+1}</th>
                                     <td>{booking.productName}</td>
