@@ -10,7 +10,8 @@ const ProductDetails = () => {
 
     const products = useLoaderData()
     console.log(products)
-    const {productPicture, productName, sellerName, originalPrice, resalePrice} = products
+    const { image, productName, sellerName, originalPrice, resalePrice } = products
+   
 
     const { data: categoryList } = useQuery({
         queryKey: ["categories"],

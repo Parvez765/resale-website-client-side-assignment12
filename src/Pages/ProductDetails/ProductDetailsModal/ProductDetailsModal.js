@@ -8,7 +8,7 @@ const ProductDetailsModal = ({ booking }) => {
     const navigate = useNavigation()
     const { user } = useContext(AuthContext)
 
-    const { originalPrice, sellingPrice, productDescription, usagesTime, location, conditions, productName} = booking
+    const { originalPrice, sellingPrice, productDescription, usagesTime, location, conditions, productName, image} = booking
     
     console.log("This is",booking)
 
@@ -39,7 +39,7 @@ const ProductDetailsModal = ({ booking }) => {
     const bookingConfirmation = () => {
         const bookedPhone = {
             originalPrice, sellingPrice, productDescription, usagesTime, location, conditions, productName,
-            email: user?.email
+            email: user?.email, image
         }
         fetch(`http://localhost:5000/bookings`, {
             method: "POST",

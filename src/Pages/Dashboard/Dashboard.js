@@ -67,14 +67,12 @@ const Dashboard = () => {
                 if (data.acknowledged === true) {
                     Swal.fire(
                         'Congratulation!',
-                        'Product Successfully Deleted From WishList!',
+                        'Product Successfully Deleted From OrderList!',
                         'success'
                       )
                 }
             })
     }
-    
-    
     const handleDelete = (id) => {
         fetchDelete(id)
         
@@ -89,13 +87,14 @@ const Dashboard = () => {
                   
                     <thead>
                     <tr>
-                        <th></th>
-                        <th>Name</th>
-                        <th>Condition</th>
-                        <th>Selling Price</th>
-                        <th>Usages Time</th>
-                        <th>Status</th>
-                        <th>Delete</th>
+                            <th></th>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Condition</th>
+                            <th>Selling Price</th>
+                            <th>Usages Time</th>
+                            <th>Status</th>
+                            <th>Delete</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -104,7 +103,12 @@ const Dashboard = () => {
                             bookings?.map((booking, i) => <>
                                 
                                 <tr>
-                                    <th>{i+1}</th>
+                                    <th>{i + 1}</th>
+                                    <div className="avatar">
+                                        <div className="w-[50px] ms-10 mt-4 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                            <img src={booking.image} />
+                                        </div>
+                                    </div>
                                     <td>{booking.productName}</td>
                                     <td>{booking.conditions}</td>
                                     <td>{booking.sellingPrice} BDT</td>
@@ -128,6 +132,7 @@ const Dashboard = () => {
                     <thead>
                     <tr>
                         <th></th>
+                        <th></th>
                         <th>Name</th>
                         <th>Condition</th>
                         <th>Selling Price</th>
@@ -143,7 +148,12 @@ const Dashboard = () => {
                             wishLists?.map((wishlist, i) => <>
                                 
                                 <tr>
-                                    <th>{i+1}</th>
+                                    <th>{i + 1}</th>
+                                    <div className="avatar">
+                                        <div className="w-[50px] ms-10 mt-4 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                            <img src={wishlist.adItem.image} alt=""/>
+                                        </div>
+                                    </div>
                                     <td>{wishlist.adItem.productName}</td>
                                     <td>{wishlist.adItem.conditions}</td>
                                     <td>{wishlist.adItem.sellingPrice} BDT</td>
