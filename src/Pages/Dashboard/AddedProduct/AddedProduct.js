@@ -112,7 +112,7 @@ const AddedProduct = () => {
                                 <div className="card-actions justify-end">
                                     <div className='flex items-center justify-around'>
                                         <div>
-                                            <button onClick={()=>handleupdate(product._id)} className="btn btn-primary mr-10">Advertize</button>
+                                        {!product?.isBooked ? <button onClick={()=>handleupdate(product._id)} className="btn btn-primary mr-10">Advertize</button> :  <button className="btn btn-primary mr-10" disabled>Sold</button>}
                                         </div>
                                         <div>
                                             <button className="btn btn-outline" onClick={()=> handleDelete(product._id)}>Delete</button>     

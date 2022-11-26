@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const Dashboard = () => {
@@ -32,6 +33,29 @@ const Dashboard = () => {
    }, [user?.email])
 
 
+    const fetchDelete = (id) => {
+        fetch(`http://localhost:5000/wishlist/${id}`, {
+            method: "DELETE"
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged === true) {
+                    Swal.fire(
+                        'Congratulation!',
+                        'Product Successfully Deleted From WishList!',
+                        'success'
+                      )
+                }
+            })
+    }
+    
+    // Delete Operation
+    const handleDelete = (id) => {
+        fetchDelete(id)
+        
+    }
+    
+    
     return (
         <div>
             <h2 className='text-2xl font-bold mb-10'>My Orders</h2>
@@ -45,6 +69,7 @@ const Dashboard = () => {
                         <th>Condition</th>
                         <th>Selling Price</th>
                         <th>Usages Time</th>
+                        <th>Status</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -58,6 +83,7 @@ const Dashboard = () => {
                                     <td>{booking.conditions}</td>
                                     <td>{booking.sellingPrice} BDT</td>
                                     <td>{booking.usagesTime}</td>
+                                    <td>{!booking?.isBooked ? <button className='btn btn-primary'>Avaiable</button> : <button className='btn btn-outline'>Sold</button> }</td>
                                 </tr>
                             </>)  
                          }
@@ -79,6 +105,9 @@ const Dashboard = () => {
                         <th>Condition</th>
                         <th>Selling Price</th>
                         <th>Usages Time</th>
+                        <th>Status</th>
+                        <th>Delete</th>
+                        
                     </tr>
                     </thead>
                     <tbody>
@@ -92,6 +121,8 @@ const Dashboard = () => {
                                     <td>{wishlist.adItem.conditions}</td>
                                     <td>{wishlist.adItem.sellingPrice} BDT</td>
                                     <td>{wishlist.adItem.usagesTime}</td>
+                                    <td>{!wishlist?.adItem.isBooked ? <button className='btn btn-primary'>Avaiable</button> : <button className='btn btn-outline'>Sold</button>}</td>
+                                    <td><button onClick={()=> handleDelete(wishlist._id)} className="btn btn-sm">Delete</button></td>
                                 </tr>
                             </>)  
                          }
