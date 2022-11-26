@@ -1,9 +1,11 @@
-#Project Live Link - https://buyandsell-932a5.web.app/
-#Admin Email- asif.cse473@gmail.com
-#Admin Password - 123456 
+*Project Live Link - 
+https://buyandsell-932a5.web.app/
+
+*Admin Email- asif.cse473@gmail.com
+*Admin Password - 123456 
 
 
-##Project Details
+**Project Details
 This is An Website of Recommerce Selling Platform name BuyAndSell Here Any Wan Can Sell Their Product As well as buy product
 
 ##Project Features
