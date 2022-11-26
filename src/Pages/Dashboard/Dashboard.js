@@ -30,9 +30,34 @@ const Dashboard = () => {
             .then(res => res.json())
             .then(data => setWishList(data))
         
-   }, [user?.email])
+    }, [user?.email])
+    
+
+    // Booking Delete Operation 
+    const fetchDeleteBooking = (id) => {
+        fetch(`http://localhost:5000/bookings/${id}`, {
+            method: "DELETE"
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged === true) {
+                    Swal.fire(
+                        'Congratulation!',
+                        'Product Successfully Deleted From WishList!',
+                        'success'
+                      )
+                }
+            })
+    }
+
+    const handleBookingDelete = (id) => {
+       fetchDeleteBooking(id)
+    }
 
 
+
+
+    // WishList Delete Operation
     const fetchDelete = (id) => {
         fetch(`http://localhost:5000/wishlist/${id}`, {
             method: "DELETE"
@@ -49,7 +74,7 @@ const Dashboard = () => {
             })
     }
     
-    // Delete Operation
+    
     const handleDelete = (id) => {
         fetchDelete(id)
         
@@ -70,6 +95,7 @@ const Dashboard = () => {
                         <th>Selling Price</th>
                         <th>Usages Time</th>
                         <th>Status</th>
+                        <th>Delete</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -83,7 +109,8 @@ const Dashboard = () => {
                                     <td>{booking.conditions}</td>
                                     <td>{booking.sellingPrice} BDT</td>
                                     <td>{booking.usagesTime}</td>
-                                    <td>{!booking?.isBooked ? <button className='btn btn-primary'>Avaiable</button> : <button className='btn btn-outline'>Sold</button> }</td>
+                                    <td>{!booking?.isBooked ? <button className='btn btn-primary'>Avaiable</button> : <button className='btn btn-outline'>Sold</button>}</td>
+                                    <td><button onClick={()=> handleBookingDelete(booking._id)} className="btn btn-sm">Delete</button></td>
                                 </tr>
                             </>)  
                          }
