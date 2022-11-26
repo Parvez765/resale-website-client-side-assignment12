@@ -5,6 +5,8 @@ const Dashboard = () => {
     const {user} = useContext(AuthContext)
     const [bookings, setBookings] = useState([])
 
+    
+
     useEffect(() => {
         fetch(`http://localhost:5000/bookings?email=${user?.email}`, {
             headers: {
