@@ -47,7 +47,10 @@ const AddedProduct = () => {
         
         const handleupdate = (id) => {
             fetch(`http://localhost:5000/advertised/${id}`, {
-                method: "PUT"
+                method: "PUT",
+                headers: {
+                    authorization: `bearer ${localStorage.getItem("accessToken")}`
+                }
             })
                 .then(res => res.json())
                 .then(data => {
@@ -60,7 +63,31 @@ const AddedProduct = () => {
                    }
                     
             })
-        }
+    }
+
+    const fetchDelete = (id) => {
+        fetch(`http://localhost:5000/products/${id}`, {
+            method: "DELETE", 
+            headers: {
+                authorization: `bearer ${localStorage.getItem("accessToken")}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged === true) {
+                    Swal.fire(
+                        'Congratulation!',
+                        'Product Successfully Advertised!',
+                        'success'
+                      )
+                }
+        })
+    }
+    
+    // Delete Product
+    const handleDelete = (id) => {
+       fetchDelete(id)
+    }
     
 
     return (
@@ -83,9 +110,13 @@ const AddedProduct = () => {
                                 <h2 className="text-center font-bold">Description: {product.productDescription}</h2>
                                 <h2 className="text-center font-bold">Location: {product.location}</h2>
                                 <div className="card-actions justify-end">
-                                    <div>
-                                        <button onClick={()=>handleupdate(product._id)} className="btn btn-primary">Advertize</button>
-                                        <button className="btn btn-ghost">Delete</button>     
+                                    <div className='flex items-center justify-around'>
+                                        <div>
+                                            <button onClick={()=>handleupdate(product._id)} className="btn btn-primary mr-10">Advertize</button>
+                                        </div>
+                                        <div>
+                                            <button className="btn btn-outline" onClick={()=> handleDelete(product._id)}>Delete</button>     
+                                        </div>
                                     </div>
                                 </div>
                             </div>
