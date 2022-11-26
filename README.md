@@ -1,5 +1,4 @@
-# Project Live Link - 
-https://buyandsell-932a5.web.app/
+# Project Live Link - https://buyandsell-932a5.web.app/
 
 # Admin Email- asif.cse473@gmail.com
 # Admin Password - 123456 
