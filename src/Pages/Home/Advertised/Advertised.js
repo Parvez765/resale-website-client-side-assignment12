@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const Advertised = () => {
+
+    const {user} = useContext(AuthContext)
 
     const [advertised, setAdvertised] = useState([])
 
@@ -17,12 +20,15 @@ const Advertised = () => {
 
     // Add To WishList
     const handleAddToWishList = (adItem) => {
+
+        const addedProducts = {adItem, email: user?.email}
+
         fetch(`http://localhost:5000/wishlist`, {
             method: "POST",
             headers: {
                 "content-type" : "application/json"
             },
-            body: JSON.stringify(adItem)
+            body: JSON.stringify(addedProducts)
         })
             .then(res => res.json())
             .then(data => {
