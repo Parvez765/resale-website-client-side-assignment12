@@ -66,16 +66,29 @@ const ProductDetailsModal = ({ booking }) => {
             <div className="modal">
             <div className="modal-box relative">
                 <label htmlFor="product-details" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <h2 className='text-xl font-bold mb-6'>{productName}</h2>
-                Seller Name:  { user?.displayName ? <p className="py-4">{ user?.displayName}</p>
-                    : "No Name Information Found"}
-                    <p className="py-4">User Email: {user?.email}</p>
+                    
+                    <p className="py-4">Seller Email: {user?.email}</p>
                     <p className="py-4">Description: {productDescription}</p>
                     <p className="py-4">Product Original Price: {originalPrice} BDT</p>
                     <p className="py-4">Product Selling Price: {sellingPrice} BDT</p>
                     <p className="py-4">Product Usages Time: {usagesTime}</p>
                     <p className="py-4">Condition: {conditions}</p>
-                    <p className="py-4">Location: {location}</p>
+                    <div className="form-control w-full block m-auto">
+                        <label className="label">
+                            <span className="label-text justify-center">Location</span>
+                          
+                        </label>
+                        <input type="text" name="location" placeholder="Type Your Location Here" className="input input-bordered w-full max-w-xs mb-6" />
+                       
+                    </div>
+                    <div className="form-control w-full block m-auto">
+                        <label className="label">
+                            <span className="label-text justify-center">Mobile Number</span>
+                          
+                        </label>
+                        <input type="number" name="phone" placeholder="Type Your Phone Number" className="input input-bordered w-full max-w-xs mb-10" />
+                       
+                    </div>
                    <button onClick={handleBookProduct} className='btn btn-primary'>Book Your Desire Product</button>
             </div>
             </div>
