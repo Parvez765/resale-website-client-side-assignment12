@@ -46,7 +46,7 @@ const Dashboard = () => {
                 if (data.acknowledged === true) {
                     Swal.fire(
                         'Congratulation!',
-                        'Product Successfully Deleted From WishList!',
+                        'Product Successfully Deleted From Orders!',
                         'success'
                       )
                 }
@@ -73,7 +73,7 @@ const Dashboard = () => {
                 if (data.acknowledged === true) {
                     Swal.fire(
                         'Congratulation!',
-                        'Product Successfully Deleted From OrderList!',
+                        'Product Successfully Deleted From Wishlist!',
                         'success'
                       )
                 }

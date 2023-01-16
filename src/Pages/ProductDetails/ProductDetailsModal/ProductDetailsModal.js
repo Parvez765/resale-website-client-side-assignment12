@@ -74,16 +74,16 @@ const ProductDetailsModal = ({ booking }) => {
                     <p className="py-4">Product Usages Time: {usagesTime}</p>
                     <p className="py-4">Condition: {conditions}</p>
                     <div className="form-control w-full block m-auto">
-                        <label className="label">
-                            <span className="label-text justify-center">Location</span>
+                        <label className="mb-5">
+                            <span className="label-text flex justify-center">Location</span>
                           
                         </label>
                         <input type="text" name="location" placeholder="Type Your Location Here" className="input input-bordered w-full max-w-xs mb-6" />
                        
                     </div>
                     <div className="form-control w-full block m-auto">
-                        <label className="label">
-                            <span className="label-text justify-center">Mobile Number</span>
+                        <label className="">
+                            <span className="label-text flex justify-center">Mobile Number</span>
                           
                         </label>
                         <input type="number" name="phone" placeholder="Type Your Phone Number" className="input input-bordered w-full max-w-xs mb-10" />

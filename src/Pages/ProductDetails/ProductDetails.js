@@ -45,8 +45,8 @@ const ProductDetails = () => {
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 container mx-auto justify-items-center mt-12'>
                 {
                     products.map(product => <>
-                        <div className="card w-96 bg-base-100 shadow-xl" key={product._id}>
-                            <figure><img src={product.image} alt="Shoes" /></figure>
+                        <div className="card lg:w-96 bg-base-100 shadow-xl" key={product._id}>
+                            <figure><img src={product.image} alt="Shoes" className='p-14'/></figure>
                             <div className="card-body">
                                 <h2 className="text-center font-bold">{product.productName}</h2>
                                  <p>Category: {categoryList?.find(category => category._id === product.options).categoryName }</p>
@@ -59,7 +59,11 @@ const ProductDetails = () => {
                                 <h2 className="text-center font-bold">Description: {product.productDescription}</h2>
                                 <h2 className="text-center font-bold">Location: {product.location}</h2>
                                 <div className="card-actions justify-end">
-                               {sellerList?.find(seller => seller._id === product.sellerName).isVerified && <label onClick={()=> handlBooking(product)} htmlFor="product-details" className="btn btn-primary">Book Now</label>}
+                                    {sellerList?.find(seller => seller._id === product.sellerName).isVerified && <>
+                                        <div className='block mx-auto'>
+                                            <label onClick={()=> handlBooking(product)} htmlFor="product-details" className="btn btn-primary">Book Now</label>
+                                        </div>
+                                    </>}
                                 <ProductDetailsModal product= {product} booking={booking}></ProductDetailsModal>
                                 </div>
                             </div>

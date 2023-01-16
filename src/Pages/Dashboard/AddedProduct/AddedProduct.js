@@ -91,12 +91,12 @@ const AddedProduct = () => {
     
 
     return (
-        <div>
+        <div className='p-10 mb-10'>
             <h2 className='text-3xl font-bold mt-10'>List Of Products You Added</h2>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 container mx-auto justify-items-center mt-12'>
                 {
                     products.map(product => <>
-                        <div className="card w-96 bg-base-100 shadow-xl" key={product._id}>
+                        <div className="card bg-base-100 shadow-xl" key={product._id}>
                             <figure><img src={product.image} alt="Shoes" /></figure>
                             <div className="card-body">
                                 <h2 className="text-center font-bold">{product.productName}</h2>

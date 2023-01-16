@@ -44,14 +44,14 @@ const Advertised = () => {
     }
     
     return (
-        <div>
+        <div className='p-10'>
             {advertised.length > 0 && <>
-                <h2 className='text-3xl font-bold mb-10'>Advertised Product</h2>
+                <h2 className='text-3xl lg:text-5xl font-bold mb-10'>Advertised Product</h2>
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 container mx-auto justify-items-center mt-10 mb-10'>
                 {
-                    advertised.map(adItem => <>
-                        <div className="card w-96 bg-base-100 shadow-xl">
-                            <figure><img src={adItem.image} alt="Shoes" /></figure>
+                    advertised?.map(adItem => <>
+                        <div className="card lg:w-96 bg-base-100 shadow-xl">
+                            <figure><img src={adItem.image} alt="Shoes" className='mt-6 p-14'/></figure>
                             <div className="card-body">
                                 <h2 className="text-center font-bold text-2xl">{adItem.productName}</h2>
                                 <p>{adItem.productDescription}</p>
